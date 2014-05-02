@@ -35,9 +35,6 @@ class Design_whistle(design.Instrument_designer_with_bore_scale):
     #tweak_bulgepos2 = 0.9
     tweak_boreless = 0.65 #0.49
     
-    xpad = 0.0
-    ypad = 0.0
-    
     def patch_instrument(self, inst):
         inst = copy.copy(inst)
         inst.true_length = inst.length
@@ -234,26 +231,22 @@ class Design_recorder(Design_whistle):
 Design a three hole pipe, i.e. the pipe in pipe-and-tabor.
 """)
 class Design_three_hole_whistle(Design_whistle):
-    bore_scale = 1.2
+    bore_scale = 1.25
     
     divisions = [
         [],
         [(2,0.3)],
         [(2,0.05),(2,0.5)],
-        [(2,0.05),(2,0.35),(2,0.65)],
-        [(1,0.5),(2,0.2),(2,0.45),(2,0.7)],
+        [(2,0),(2,0.333),(2,0.666)],
+        [(0,0),(2,0),(2,0.333),(2,0.666)],
         ]
-    
-    xpad = 0.0
-    ypad = 1.0
     
     initial_length = design.wavelength('D3') * 0.5
     
     min_hole_diameters = design.bore_scaler([ 3.0 ]*3)
     max_hole_diameters = design.bore_scaler([ 14.0 ]*3)
-    max_hole_spacing = design.scaler([ 100.0, 100.0 ])
     
-    hole_angles = [ -30.0, 30.0, 30.0 ]
+    hole_angles = [ 0.0, 0.0, 0.0 ]
     horiz_angles = [ 0.0, 0.0, 180.0 ]
     mid_cut = 2
     
@@ -261,23 +254,16 @@ class Design_three_hole_whistle(Design_whistle):
     
     initial_hole_fractions = [ 0.1,0.15,0.2 ]
     
-    inner_diameters = design.bore_scaler([ 10.0, 10.0, 12.5, 15.0, 17.5, 20.0,  20.0 ])
-    initial_inner_fractions = [ 0.1, 0.2, 0.3, 0.4, 0.5 ]
+    inner_diameters = design.bore_scaler([ 15.0, 15.0, 20.0, 20.0 ])
+    initial_inner_fractions = [ 0.1, 0.75 ]
     
-    outer_diameters = design.bore_scaler([ 45.0, 32.0, 32.0 ])
-    outer_angles = [ -25.0, (0.0,None), None ]
-    min_outer_fraction_sep = [ 0.095, 0.0 ]
-    max_outer_fraction_sep = [ 0.105, 1.0 ]
-    initial_outer_fractions = [ 0.1 ]
+    outer_diameters = design.bore_scaler([ 23.0, 28.0, 32.0, 32.0 ])
+    min_outer_fraction_sep = [ 0.55, 0.3, 0.1 ]
+    initial_outer_fractions = [ 0.6, 0.9 ]
         
     min_inner_fraction_sep = [ 0.01 ] * 8
 
     fingerings = [
-        ('D3', [1,1,1]),
-        ('E3', [0,1,1]),
-        ('F#3',[0,0,1]),
-        ('G3', [0,0,0]),
-    
         ('D4', [1,1,1]),
         ('E4', [0,1,1]),
         ('F#4',[0,0,1]),
@@ -290,6 +276,6 @@ class Design_three_hole_whistle(Design_whistle):
         ('E5', [0,1,1]),
         ('F#5',[0,0,1]),
         ('G5', [0,0,0]),
-        ]
+    ]
 
 
